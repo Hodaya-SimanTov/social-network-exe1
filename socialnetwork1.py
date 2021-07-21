@@ -12,7 +12,7 @@ print(Adam)
 
 
 #G = nx.path_graph(4)  # or DiGraph, MultiGraph, MultiDiGraph, etc
-[n for n in my_graph.neighbors(Adam)]
+# [n for n in my_graph.neighbors(Adam)]
 
 
 # my_graph = nx.Graph()
