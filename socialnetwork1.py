@@ -66,8 +66,16 @@ for item in neighbors:
 
 nG = snaG.subgraph(neighbors)                                     #Add the edges between to Adam's neighbors
 print(nx.info(nG))                                                #All the information of Adam's neighbor graph
+print( 'Number Connected Components: {0}'.format(nx.number_connected_components(nG)))
+connectedomCponentssortedList=sorted(nx.connected_components(nG), key = len, reverse=True)
+print('Size of Largest connected component: {0}'.format(len(connectedomCponentssortedList[0])))
 
+def plot_degree_dist(G):
+    degrees = [G.degree(n) for n in G.nodes()]
+    plt.hist(degrees)
+    plt.show()
 
+plot_degree_dist(nx.gnp_random_graph(100, 0.5, directed=True))
 
 
 
