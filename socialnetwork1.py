@@ -1,4 +1,5 @@
 import snap
+import sparse
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -63,19 +64,39 @@ neighbors = list(snaG.neighbors(Adam))                            #List of Adam'
 for item in neighbors:
     nG.add_node(item)                                             #Add node to neighbors graph
     nG.add_edge(Adam,item)                                        #Add edge to neighbors graph
+nG = snaG.subgraph(neighbors)  
+pos = nx.spring_layout(nG)
 
-nG = snaG.subgraph(neighbors)                                     #Add the edges between to Adam's neighbors
+nx.draw(nG, pos, node_color = "lavender", 
+        node_size = 500, with_labels = True)  
+print("The Adam's neighbors graph  is beloe")
+plt.show()                                 #Add the edges between to Adam's neighbors
+# plt.savefig("AdamNeighborsGraph.png")
+
+# nx.draw_shell(nG,node_size = 500, with_labels = True)
+# plt.savefig("filename6.png")
+
 print(nx.info(nG))                                                #All the information of Adam's neighbor graph
 print( 'Number Connected Components: {0}'.format(nx.number_connected_components(nG)))
 connectedomCponentssortedList=sorted(nx.connected_components(nG), key = len, reverse=True)
 print('Size of Largest connected component: {0}'.format(len(connectedomCponentssortedList[0])))
 
 def plot_degree_dist(G):
+    # clearing the current plot
+    plt.clf()
     degrees = [G.degree(n) for n in G.nodes()]
     plt.hist(degrees)
+    print("The degree distribution of Adam's neighbors graph  is beloe")
     plt.show()
 
 plot_degree_dist(nx.gnp_random_graph(100, 0.5, directed=True))
+
+ego_g = nx.ego_graph(nG, Adam)
+# d = dict(ego_g.degree)
+# nx.draw(ego_g, node_color='lightblue', 
+#         with_labels=True, 
+#         nodelist=d, 
+#         node_size=[d[k]*300 for k in d])
 
 
 
