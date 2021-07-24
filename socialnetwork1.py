@@ -19,29 +19,28 @@ nG = snaG.subgraph(neighbors)                                       #Create undi
 nx.draw_random(nG,node_color = "pink", with_labels = True)          #Drawing the neighbors graph
 print("The Adam's neighbors graph is shown below: ")
 plt.show()                                            
-# plt.savefig("AdamNeighborsGraph.png")
 
 
-print(nx.info(nG))                                                  #All the information of Adam's neighbor graph
-print( 'The number Connected Components: {0}'.format(nx.number_connected_components(nG)))
-connectedomCponentssortedList=sorted(nx.connected_components(nG), key = len, reverse=True)
-print('The size of the Largest connected component is: {0}'.format(len(connectedomCponentssortedList[0])))
+print(nx.info(nG))                                                                             #All the information of Adam's neighbor graph
+print( 'The number Connected Components: {0}'.format(nx.number_connected_components(nG)))      #Print the number of connected components in the nieghbors graph
+connectedomCponentssortedList=sorted(nx.connected_components(nG), key = len, reverse=True)     #Sorting the connected components according to the size from the bigest to the smallest
+print('The size of the Largest connected component is: {0}'.format(len(connectedomCponentssortedList[0])))   #Printing the bigest connected component in the nieghbors graph
 
-def plot_degree_dist(G):
-    plt.clf()                                                        #Clearing the current plot
-    degrees = [G.degree(n) for n in G.nodes()]
-    plt.hist(degrees)
+def plot_degree_dist(G):                                                            #The functiom gets a graph and displays the degree distribution of the graph
+    plt.clf()                                                                       #Clearing the current plot
+    degrees = [G.degree(n) for n in G.nodes()]                                      #A list with all the graph's degrees                       
+    plt.hist(degrees)                                               
     print("The degree distribution of Adam's neighbors graph is shown below: ")
     plt.show()
 
-plot_degree_dist(nG)
+plot_degree_dist(nG)                                                                #Call the plot_degree_dist function with the neighbors graph (nG)
 
-print("The amount of triangles that includes Adam in the network is: {0}".format((nx.triangles(nG,(Adam,)))[Adam]))
+print("The amount of triangles that includes Adam in the network is: {0}".format((nx.triangles(nG,(Adam,)))[Adam]))         #Printing the amount of triangles that includes Adam in the network
 
-completeGraph=nx.complete_graph(len(nG.nodes), create_using=None)
-print("The maximum number of triangles a network of Adam's network size can have is : {0}".format((nx.triangles(completeGraph,(1,)))[1]))
-
-neighbors.remove(Adam)                                                              #Finding Adam's best friend
+completeGraph=nx.complete_graph(len(nG.nodes), create_using=None)                   #Building a conplete graph in the size of Adam's graph
+print("The maximum number of triangles a network of Adam's network size can have is : {0}".format((nx.triangles(completeGraph,(1,)))[1]))      #Printing the maximum number of triangles a network of Adam's network size can have
+ #Finding Adam's best friend
+neighbors.remove(Adam)                                                             
 neighborsG = nG.subgraph(neighbors) 
 max_grade = max(neighborsG.degree, key=lambda x: x[1])[1]                           #Find the node with the largest degree except for Adam
 BestfriendAdam = [node[0] for node in neighborsG.degree if node[1] == max_grade]    #Adam's bff - because usually with the best friend we have the most common circles because if he is the best friend then he knows the family and the other friends and so on.
