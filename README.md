@@ -19,8 +19,8 @@ We used the database of ENGB meaning the database of users that their stream is 
 
 ## Setup
 In order to run the code you need to use python version 3.7.3 and above and you need to install:
-pip install sparse
-pip install pandas
-pip install networkx
-pip install matplotlib
+* pip install sparse
+* pip install pandas
+* pip install networkx
+* pip install matplotlib
 
