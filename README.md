@@ -17,4 +17,10 @@
 The data base is of Twitch user-user networks of gamers who stream in a certain language. Nodes are the users themselves and the links are mutual friendships between them.
 We used the database of ENGB meaning the database of users that their stream is in United Kingdom English.
 
+## Setup
+In order to run the code you need to use python version 3.7.3 and above and you need to install:
+pip install sparse
+pip install pandas
+pip install networkx
+pip install matplotlib
 
