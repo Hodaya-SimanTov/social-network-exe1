@@ -3,6 +3,8 @@ import sparse
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy as np
+import collections
 
 
 df = pd.read_csv("musae_ENGB_edges.csv")                            #load database from csv file
@@ -28,8 +30,16 @@ print('The size of the Largest connected component is: {0}'.format(len(connected
 
 def plot_degree_dist(G):                                                            #The functiom gets a graph and displays the degree distribution of the graph
     plt.clf()                                                                       #Clearing the current plot
-    degrees = [G.degree(n) for n in G.nodes()]                                      #A list with all the graph's degrees                       
-    plt.hist(degrees)                                               
+    degrees = [G.degree(n) for n in G.nodes()]  #A list with all the graph's degrees  
+    degreeCount = collections.Counter(degrees)
+    deg, cnt = zip(*degreeCount.items())  
+    myMax=max(degrees)                                                   
+    plt.hist(deg, facecolor='gray', align='mid') 
+    plt.title("Degree Histogram") 
+    plt.axis([0, 100, 0, 50])
+    plt.xticks(np.arange(0,myMax+25,20))   
+    plt.xlabel('Degree');  
+    plt.ylabel('Fraction of nodes')                                       
     print("The degree distribution of Adam's neighbors graph is shown below: ")
     plt.show()
 
@@ -66,21 +76,5 @@ print( 'The number of subgroups of Adam`s friends is: {0}'.format(nx.number_conn
 plt.clf()
 nx.draw_random(neighborsG,node_size =1200,node_color = "pink", with_labels = True)
 plt.show()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
